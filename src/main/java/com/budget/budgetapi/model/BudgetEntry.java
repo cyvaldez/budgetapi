@@ -37,7 +37,7 @@ public class BudgetEntry {
         this.description=entryDTO.getDescription();
         this.type= stringToType(entryDTO.getType());
         this.planedAmount=(double) entryDTO.getPlanedAmount();
-        this.usedAmount=(double)entryDTO.getUsedAmount();
+        this.usedAmount=(double) entryDTO.getUsedAmount();
     }
 
     public BudgetEntry(){}
@@ -97,7 +97,6 @@ public class BudgetEntry {
     public void setBudget(Budget budget) {
         this.budget = budget;
     }
-
     
 }
 
