@@ -117,7 +117,7 @@ Présente les chemins d’accès organisés par catégorie, par exemple :
   "usedAmount": 20
 }
 ```
-- 📝 Note that for updating a specific budget entry parameter like type, name, etc. the request body will directly have the to change `value` without curly brackets `{}`
+- 📝 Note that for updating a specific budget entry parameter like type, name, etc. the request body will directly have the to change `value` without braces `{}`
   
 ## Security
 This API use Spring Security with JWT. Every protected request must include a token :
