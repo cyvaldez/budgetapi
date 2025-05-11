@@ -17,6 +17,7 @@ public class BudgetapiApplication {
 		System.setProperty("HASH_KEY", dotenv.get("HASH_KEY"));
 		System.setProperty("MAIL_USER", dotenv.get("MAIL_USER"));
 		System.setProperty("MAIL_PASS", dotenv.get("MAIL_PASS"));
+		System.setProperty("DB_URL", dotenv.get("DB_URL"));
 
 		SpringApplication.run(BudgetapiApplication.class, args);
 	}
