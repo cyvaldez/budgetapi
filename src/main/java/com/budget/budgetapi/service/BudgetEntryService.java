@@ -56,9 +56,9 @@ public class BudgetEntryService {
         return new ExposeEntry (budgetEntryRepository.save(budgetEntry));
     }
     public ExposeEntry updateBudgetEntry(Long budgetId, Long budgetEntryId, BudgetEntryDTO budgetEntryDTO) {
-        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         if (!budgetEntry.getBudget().getId().equals(budgetId)) {
-            throw new RuntimeException("Zugriffsfehler: Entry gehört nicht diesem Budget");
+            throw new RuntimeException("Access failure: This entry dont belong to this Budget");
         }
         Budget budget= budgetEntry.getBudget();
         User user= budget.getUser();
@@ -89,9 +89,9 @@ public class BudgetEntryService {
 
     //Ausgabe buchen
     public ExposeEntry addUsedAmount(Long budgetId, Long budgetEntryId,Double usedAmount){
-        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         if (!budgetEntry.getBudget().getId().equals(budgetId)) {
-            throw new RuntimeException("Zugriffsfehler: Entry gehört nicht diesem Budget");
+            throw new RuntimeException("Access failure: This entry dont belong to this Budget");
         }
         Budget budget= budgetEntry.getBudget();
         User user= budget.getUser();
@@ -112,9 +112,9 @@ public class BudgetEntryService {
 
     //Ausgabe ändern
     public ExposeEntry changeUsedAmount(Long budgetId, Long budgetEntryId,Double usedAmount){
-        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         if (!budgetEntry.getBudget().getId().equals(budgetId)) {
-            throw new RuntimeException("Zugriffsfehler: Entry gehört nicht diesem Budget");
+            throw new RuntimeException("Access failure: This entry dont belong to this Budget");
         }
         Budget budget= budgetEntry.getBudget();
         User user= budget.getUser();
@@ -134,9 +134,9 @@ public class BudgetEntryService {
 
     //modify the planedAmount for an entry
     public ExposeEntry updatePlanedAmount(Long budgetId, Long budgetEntryId,Double planedAmount){
-        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         if (!budgetEntry.getBudget().getId().equals(budgetId)) {
-            throw new RuntimeException("Zugriffsfehler: Entry gehört nicht diesem Budget");
+            throw new RuntimeException("Access failure: This entry dont belong to this Budget");
         }
         Budget budget= budgetEntry.getBudget();
         User user= budget.getUser();
@@ -156,19 +156,19 @@ public class BudgetEntryService {
     }
 
     public ExposeEntry changeDescription(Long budgetId, Long budgetEntryId, String newDes){
-        var existingBudgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var existingBudgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         existingBudgetEntry.setDescription(newDes);
         return new ExposeEntry(budgetEntryRepository.save(existingBudgetEntry));
     }
 
     public ExposeEntry changeName(Long budgetId, Long budgetEntryId, String newName){
-        var existingBudgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var existingBudgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         existingBudgetEntry.setName(newName);
         return new ExposeEntry(budgetEntryRepository.save(existingBudgetEntry));
     }
 
     public ExposeEntry changeType(Long budgetId, Long budgetEntryId, String newTyp){
-        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var budgetEntry = budgetEntryRepository.findById(budgetEntryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         Budget budget= budgetEntry.getBudget();
         User user= budget.getUser();
         switch(budgetEntry.getType()){
@@ -205,10 +205,10 @@ public class BudgetEntryService {
         if (!budgetEntryRepository.existsById(entryId)) {
             throw new RuntimeException("Entry not found with ID: " + entryId);
         }
-        var budget= budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget nicht gefunden"));
-        var budgetEntry= budgetEntryRepository.findById(entryId).orElseThrow(() -> new RuntimeException("BudgetEntry nicht gefunden"));
+        var budget= budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget not found"));
+        var budgetEntry= budgetEntryRepository.findById(entryId).orElseThrow(() -> new RuntimeException("BudgetEntry not found"));
         if (!budgetEntry.getBudget().getId().equals(budgetId)) {
-            throw new RuntimeException("Zugriffsfehler: Entry gehört nicht diesem Budget");
+            throw new RuntimeException("Access failure: This entry dont belong to this Budget");
         }
         User user= budget.getUser();
         switch(budgetEntry.getType()){

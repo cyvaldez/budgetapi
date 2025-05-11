@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: budget-api
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: DB_USER
+        value: root
+      - key: DB_PASS
+        value: Rickcyrille!2015
+      - key: MAIL_USER
+        value: ton_email
+      - key: MAIL_PASS
+        value: lrgeymqmfxflrnyg

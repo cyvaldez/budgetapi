@@ -47,9 +47,9 @@ public class BudgetService {
 
     // update Budget 
     public ExposeBudget updateBudget(Long userId, Long budgetId, BudgetDTO budget) {
-        var existingBudget = budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget nicht gefunden"));
+        var existingBudget = budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget not found"));
         if (!existingBudget.getUser().getId().equals(userId)) {
-            throw new RuntimeException("Zugriffsfehler: Budget gehört nicht diesem Benutzer");
+            throw new RuntimeException("Acces failur: This Budget don't belong to the Connected user");
         }
         existingBudget.setName(budget.getName());
         existingBudget.setMonth(Month.valueOf(budget.getMonth().toUpperCase()));
@@ -60,7 +60,7 @@ public class BudgetService {
 
     public ExposeBudget duplicateThisBudget(Long budgetId){
         Budget newBudget= new Budget();
-        var altBudget = budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget nicht gefunden"));
+        var altBudget = budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget not found"));
         newBudget.setName(altBudget.getName());
         newBudget.setUser(altBudget.getUser());
         newBudget.setDescription(altBudget.getDescription());
@@ -83,9 +83,9 @@ public class BudgetService {
     }
 
     public void deleteBudget(Long userId, Long budgetId){
-        var budget = budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget nicht gefunden"));
+        var budget = budgetRepository.findById(budgetId).orElseThrow(() -> new RuntimeException("Budget not found"));
         if (!budget.getUser().getId().equals(userId)) {
-            throw new RuntimeException("Zugriffsfehler: Budget gehört nicht diesem Benutzer");
+            throw new RuntimeException("Acces failur: This Budget don't belong to the Connected user");
         }
         User user= budget.getUser();
         for(BudgetEntry budgetEntry: budget.getBudgetentries()){

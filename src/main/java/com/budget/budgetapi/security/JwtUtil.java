@@ -19,7 +19,7 @@ public class JwtUtil {
     private String jwtSecret;
 
     private final long jwtExpirationMs = 86400000; // 24h
-
+    private final long resetTokenExpirationMs = 15 * 60 * 1000; // 15 minutes
     private Key key;
 
     @PostConstruct
@@ -36,6 +36,17 @@ public class JwtUtil {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
+
+    public String generatePasswordResetToken(String email) {
+        return Jwts.builder()
+            .setSubject(email)
+            .setIssuedAt(new Date())
+            .setExpiration(new Date(System.currentTimeMillis() + resetTokenExpirationMs))
+            .signWith(key,SignatureAlgorithm.HS512)
+            .compact();
+    }
+
+   
 
     public String getEmailFromToken(String token) {
         return Jwts.parserBuilder()

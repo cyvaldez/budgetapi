@@ -11,13 +11,12 @@ public class BudgetapiApplication {
 	public static void main(String[] args) {
          // Load the .env file
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-
+        //set env variable
 		System.setProperty("DB_USER", dotenv.get("DB_USER"));
 		System.setProperty("DB_PASS", dotenv.get("DB_PASS"));
 		System.setProperty("HASH_KEY", dotenv.get("HASH_KEY"));
-
-        System.out.println("DB_USER = " + System.getProperty("DB_USER"));
-		System.out.println("DB_PASS = " + System.getProperty("DB_PASS"));
+		System.setProperty("MAIL_USER", dotenv.get("MAIL_USER"));
+		System.setProperty("MAIL_PASS", dotenv.get("MAIL_PASS"));
 
 		SpringApplication.run(BudgetapiApplication.class, args);
 	}

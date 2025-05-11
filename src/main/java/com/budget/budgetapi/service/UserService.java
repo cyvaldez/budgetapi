@@ -32,26 +32,25 @@ public class UserService {
 
     public ExposeUser loginUser(String email, String rawPassword) throws IllegalAccessException {
         User user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-            System.out.println("raw password: " +rawPassword+" user.password: "+ user.getPassword()+ " matches: "+ passwordEncoder.matches(rawPassword, user.getPassword())+ "\n");
             return new ExposeUser(user);
         } else {
-            throw new IllegalAccessException("Falsches Passwort");
+            throw new IllegalAccessException("Wrong Password!");
         }
     }
 
     public ExposeUser getMe(UserAuth userAuth){
         User user = userRepository.findByEmail(userAuth.getEmail())
-            .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
         return new ExposeUser(user);
     }
     
     public ExposeUser changePassword(Long userId, changePasswordDTO change){
     User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (passwordEncoder.matches(change.getAltPassword(), user.getPassword())) {
             user.setPassword(passwordEncoder.encode(change.getNewPassword()));
@@ -62,7 +61,7 @@ public class UserService {
 
     public ExposeUser changeUserEmail(Long userId, ChangeEmailDTO change){
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
     
             if (passwordEncoder.matches(change.getPassword(), user.getPassword())) {
                 user.setEmail(change.getNewEmail());
@@ -73,7 +72,7 @@ public class UserService {
 
     public ExposeUser changeUserName(Long userId, ChangeUserName change){
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+                .orElseThrow(() -> new RuntimeException("User not found"));
     
             if (passwordEncoder.matches(change.getPassword(), user.getPassword())) {
                 user.setName(change.getNewName());
@@ -84,7 +83,7 @@ public class UserService {
 /* 
     public ExposeUser updateGlobalvalues(Long userId){
         User user = userRepository.findById(userId)
-        .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+        .orElseThrow(() -> new RuntimeException("User not found"));
         Double spending, invest, saving, income;
         spending=0d;
         invest=0.0;
@@ -121,7 +120,7 @@ public class UserService {
 */
     public void deleteUserAccount( Long userId){
          userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("Benutzer nicht gefunden"));
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
         userRepository.deleteById(userId);
          
