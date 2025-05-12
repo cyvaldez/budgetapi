@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>budgetapi</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 2rem;
+            background: linear-gradient(to right, #f0f2f5, #ffffff);
+            color: #2e2e2e;
+            line-height: 1.7;
+        }
+
+        h1 {
+            color: #1565c0;
+            font-size: 2.7rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #64b5f6;
+            padding-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            color: #1258a9;
+            font-size: 2.1rem;
+            margin-top: 2.2rem;
+            border-bottom: 2px solid #90caf9;
+            padding-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #0277bd;
+            font-size: 1.6rem;
+            margin-top: 1.8rem;
+            font-weight: 500;
+        }
+
+        h4 {
+            color: #455a64;
+            font-size: 1.25rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        a {
+            color: #1565c0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0d47a1;
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e3f2fd;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        code {
+            background-color: #f1f8e9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #2e7d32;
+            font-size: 0.95rem;
+        }
+
+        pre {
+            background-color: #eceff1;
+            padding: 1.2rem;
+            border-left: 4px solid #1976d2;
+            border-radius: 6px;
+            overflow-x: auto;
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .endpoint {
+            background-color: #e8f5e9;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 5px solid #43a047;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .example {
+            background-color: #fff3e0;
+            border-left: 5px solid #fb8c00;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            border-radius: 6px;
+        }
+
+        .note {
+            background-color: #e3f2fd;
+            border-left: 5px solid #1e88e5;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            border-radius: 6px;
+        }
+
+        #footer {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #90a4ae;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 class="code-line" data-line-start=0 data-line-end=1><a id="Budget_API_0"></a>Budget API</h1>
+    <h2 class="code-line" data-line-start=2 data-line-end=3><a id="Description_2"></a>Description</h2>
+    <p class="has-line-data" data-line-start="3" data-line-end="4">This API may help users to plan and follow their
+        budgets with regart to their income, invesments, saving and spendings.</p>
+    <h2 class="code-line" data-line-start=5 data-line-end=6><a id="Used_Technologies_5"></a>Used Technologies</h2>
+    <ul>
+        <li class="has-line-data" data-line-start="6" data-line-end="7">Java 21</li>
+        <li class="has-line-data" data-line-start="7" data-line-end="8">Spring Boot</li>
+        <li class="has-line-data" data-line-start="8" data-line-end="9">Maven</li>
+        <li class="has-line-data" data-line-start="9" data-line-end="11">H2 / MySQL</li>
+    </ul>
+    <h2 class="code-line" data-line-start=11 data-line-end=12><a id="For_Local_Installation_11"></a>For Local
+        Installation</h2>
+    <ol>
+        <li class="has-line-data" data-line-start="12" data-line-end="15">
+            <p class="has-line-data" data-line-start="12" data-line-end="14">Clone the project :<br>
+                git clone <a
+                    href="https://github.com/ton-utilisateur/budgetapi.git">https://github.com/ton-utilisateur/budgetapi.git</a>
+            </p>
+        </li>
+        <li class="has-line-data" data-line-start="15" data-line-end="18">
+            <p class="has-line-data" data-line-start="15" data-line-end="17">Go to the repository :<br>
+                cd budgetapi</p>
+        </li>
+        <li class="has-line-data" data-line-start="18" data-line-end="21">
+            <p class="has-line-data" data-line-start="18" data-line-end="20">and run :<br>
+                ./mvnw spring-boot:run</p>
+        </li>
+    </ol>
+    <h2 class="code-line" data-line-start=21 data-line-end=22><a id="Request_configuration_21"></a>Request configuration
+    </h2>
+    <h3 class="code-line" data-line-start=22 data-line-end=23><a id="6_Endpoints_principaux_22"></a>6. <strong>Endpoints
+            principaux</strong></h3>
+    <p class="has-line-data" data-line-start="23" data-line-end="24">Présente les chemins d’accès organisés par
+        catégorie, par exemple :</p>
+    <h3 class="code-line" data-line-start=26 data-line-end=27><a id="_User_26"></a>👤 User</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>POST</td>
+                <td><code>/api/auth/register</code></td>
+                <td>Register new user</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td><code>/api/auth/login</code></td>
+                <td>Login and get JWT token</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/api/auth/users/me</code></td>
+                <td>Get logged-in user info</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/auth/{userId}/changemypassword</code></td>
+                <td>Change logged-in user password</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/auth/{userId}/changemyemail</code></td>
+                <td>Change logged-in user email</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/auth/{userId}/changemyusername</code></td>
+                <td>Change logged-in user name</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td><code>/api/auth/users/{userId}</code></td>
+                <td>Delete user account</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 class="code-line" data-line-start=38 data-line-end=39><a id="_Budgets_38"></a>💰 Budgets</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>POST</td>
+                <td><code>/api/budgets/{userId}</code></td>
+                <td>Create a new budget</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/api/budgets/user/{userId}</code></td>
+                <td>Get all budgets for a user</td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td><code>/api/budgets/duplicate/{budgetId}</code></td>
+                <td>Duplicate a specific budget for the next month</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/{userId}/{budgetId}</code></td>
+                <td>Update a budget</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td><code>/api/budgets/{userId}/{budgetId}</code></td>
+                <td>Delete a budget</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 class="code-line" data-line-start=48 data-line-end=49><a id="BugetEntry_48"></a>BugetEntry</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>POST</td>
+                <td><code>/api/budgets/entries/{budgetId}</code></td>
+                <td>Create a new budget entry for this budget</td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td><code>/api/budgets/entries/{budgetId}</code></td>
+                <td>Get all budget entries for the budget with that ID</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/entries/changeDescription/{budgetId}/{budgetEntryId}</code></td>
+                <td>Change the entry’s description</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/entries/changeTyp/{budgetId}/{budgetEntryId}</code></td>
+                <td>Change the entry’s typ</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/entries/changeName/{budgetId}/{budgetEntryId}</code></td>
+                <td>Change the entry’s name</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/entries/changeusedamount/{budgetId}/{budgetEntryId}</code></td>
+                <td>Change completly the entry’s usedAmount</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/entries/updateusedamount/{budgetId}/{budgetEntryId}</code></td>
+                <td>add this a usedamount to this entry’s usedAmount</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/entries/changeplanedamount/{budgetId}/{budgetEntryId}</code></td>
+                <td>Change the entry’s planedAmount</td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td><code>/api/budgets/entries/changebudgetentry/{budgetId}/{budgetEntryId}</code></td>
+                <td>Modify all parameter of the entry</td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td><code>/api/budgets/entries/{budgetId}/{budgetEntryId}</code></td>
+                <td>Delete a budgetEntry</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 class="code-line" data-line-start=63 data-line-end=64><a id="_Sample_Request_JSON_63"></a>📥 Sample Request
+        (JSON)</h2>
+    <ul>
+        <li class="has-line-data" data-line-start="64" data-line-end="65">to register a user</li>
+    </ul>
+    <pre><code class="has-line-data" data-line-start="66" data-line-end="72" class="language-Json">{
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"user@email.com"</span></span>,
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"username"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"user_password"</span>
+</span>}
+</code></pre>
+    <ul>
+        <li class="has-line-data" data-line-start="72" data-line-end="73">user login</li>
+    </ul>
+    <pre><code class="has-line-data" data-line-start="74" data-line-end="79" class="language-Json">{
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"user@email.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"user_password"</span>
+</span>}
+</code></pre>
+    <ul>
+        <li class="has-line-data" data-line-start="79" data-line-end="80">change username</li>
+    </ul>
+    <pre><code class="has-line-data" data-line-start="81" data-line-end="86" class="language-Json">{
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"user_password"</span></span>,
+  "<span class="hljs-attribute">newName</span>": <span class="hljs-value"><span class="hljs-string">"new username"</span>
+</span>}
+</code></pre>
+    <ul>
+        <li class="has-line-data" data-line-start="86" data-line-end="87">change user email</li>
+    </ul>
+    <pre><code class="has-line-data" data-line-start="88" data-line-end="93" class="language-Json">{
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"user_password"</span></span>,
+  "<span class="hljs-attribute">newEmail</span>": <span class="hljs-value"><span class="hljs-string">"newemail@mail.com"</span>
+</span>}
+</code></pre>
+    <ul>
+        <li class="has-line-data" data-line-start="93" data-line-end="94">change user password</li>
+    </ul>
+    <pre><code class="has-line-data" data-line-start="95" data-line-end="100" class="language-Json">{
+  "<span class="hljs-attribute">altPassword</span>": <span class="hljs-value"><span class="hljs-string">"user_password"</span></span>,
+  "<span class="hljs-attribute">newPassword</span>": <span class="hljs-value"><span class="hljs-string">"newUserPassword"</span>
+</span>}
+</code></pre>
+    <ul>
+        <li class="has-line-data" data-line-start="100" data-line-end="101">create or update a budget: we choosed to
+            firstly set a empty budget before creating his entries.</li>
+    </ul>
+    <pre><code class="has-line-data" data-line-start="102" data-line-end="108" class="language-Json">{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Budget 1"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"my budget for May"</span></span>,
+  "<span class="hljs-attribute">month</span>": <span class="hljs-value"><span class="hljs-string">"may"</span>
+</span>}
+</code></pre>
+    <ul>
+        <li class="has-line-data" data-line-start="109" data-line-end="110">create or update a budget entry (or
+            subbuget) for as type “investment”, “income” or “saving” also exist.</li>
+    </ul>
+    <pre><code class="has-line-data" data-line-start="111" data-line-end="119" class="language-Json">{
+  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Food"</span></span>,
+  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"For My"</span></span>,
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"Spending"</span></span>, 
+  "<span class="hljs-attribute">planedAmount</span>": <span class="hljs-value"><span class="hljs-number">100.0</span></span>,
+  "<span class="hljs-attribute">usedAmount</span>": <span class="hljs-value"><span class="hljs-number">20</span>
+</span>}
+</code></pre>
+    <ul>
+        <li class="has-line-data" data-line-start="119" data-line-end="121">📝 Note that for updating a specific budget
+            entry parameter like type, name, etc. the request body will directly have the to change <code>value</code>
+            without braces <code>{}</code></li>
+    </ul>
+    <h2 class="code-line" data-line-start=121 data-line-end=122><a id="Security_121"></a>Security</h2>
+    <p class="has-line-data" data-line-start="122" data-line-end="124">This API use Spring Security with JWT. Every
+        protected request must include a token :<br>
+        Authorization: Bearer <code>&lt;token&gt;</code>. That <code>token</code> is returned after successful login.
+    </p>
+    <h2 class="code-line" data-line-start=125 data-line-end=126><a id="Author_125"></a>🧑‍💻Author</h2>
+    <p class="has-line-data" data-line-start="126" data-line-end="127">Made by <a
+            href="https://github.com/cyvaldez">cyvaldez</a></p>
+</body>
+
+</html>
