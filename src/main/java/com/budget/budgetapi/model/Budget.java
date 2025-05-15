@@ -30,6 +30,9 @@ public class Budget {
     private String description;
     private Double planedAmount;
     private Double usedAmount;
+    private Double savings;
+    private Double invested;
+    private Double incomeThisMonth;
     private LocalDate creationDate;
     private LocalDate lastModifiedDate;
     
@@ -51,6 +54,9 @@ public class Budget {
         this.month=Month.valueOf(budgetDTO.getMonth().toUpperCase()) ;
         this.planedAmount=0.0;
         this.usedAmount=0.0;
+        this.savings=0d;
+        this.invested=0d;
+        this.incomeThisMonth=0d;
     }
     public Budget(){}
 
@@ -94,10 +100,24 @@ public class Budget {
         this.usedAmount = usedAmount;
     }
 
+    public Double getSavings() {
+        return savings;
+    }
+    public void setSavings(Double savings) {
+        this.savings = savings;
+    }
+    public Double getInvested() {
+        return invested;
+    }
+    public void setInvested(Double invested) {
+        this.invested = invested;
+    }
+    
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
-
+    
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
@@ -132,6 +152,12 @@ public class Budget {
 
     public void setBudgetentries(List<BudgetEntry> budgetentries) {
         this.budgetentries = budgetentries;
+    }
+    public Double getIncomeThisMonth() {
+        return incomeThisMonth;
+    }
+    public void setIncomeThisMonth(Double incomeThisMonth) {
+        this.incomeThisMonth = incomeThisMonth;
     }
 
 }

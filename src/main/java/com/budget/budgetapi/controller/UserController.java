@@ -21,6 +21,7 @@ import com.budget.budgetapi.dtos.userDTO.ChangeUserName;
 import com.budget.budgetapi.dtos.userDTO.ExposeUser;
 import com.budget.budgetapi.dtos.userDTO.LoginDTO;
 import com.budget.budgetapi.dtos.userDTO.RegisterDTO;
+import com.budget.budgetapi.dtos.userDTO.RegisterResponse;
 import com.budget.budgetapi.dtos.userDTO.changePasswordDTO;
 import com.budget.budgetapi.security.JwtUtil;
 import com.budget.budgetapi.service.UserService;
@@ -37,8 +38,11 @@ public class UserController {
 private JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public ExposeUser register(@RequestBody RegisterDTO user) {
-        return userService.registerUser(user);
+    public ResponseEntity<?> register(@RequestBody RegisterDTO user) {
+         String token = jwtUtil.generateToken(user.getEmail());
+         ExposeUser exposeUser= userService.registerUser(user);
+         RegisterResponse answer= new RegisterResponse(exposeUser, token);
+        return ResponseEntity.ok(answer);
     }
 
     @PostMapping("/login")
@@ -51,6 +55,13 @@ private JwtUtil jwtUtil;
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Login fehlgeschlagen: " + e.getMessage());
         }
     }
+    @PostMapping("/logout")
+    public void logoutUser(@RequestBody String email){
+
+        userService.logoutUser(email);
+        
+    }
+    
 
     @GetMapping("user/me")
     public ExposeUser getMe(@AuthenticationPrincipal UserAuth user) {

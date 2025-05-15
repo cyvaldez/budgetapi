@@ -68,6 +68,9 @@ public class BudgetService {
         newBudget.setMonth(altBudget.getMonth().plus(1));
         newBudget.setPlanedAmount(altBudget.getPlanedAmount());
         newBudget.setUsedAmount(0.0);
+        newBudget.setSavings(altBudget.getSavings());
+        newBudget.setInvested(altBudget.getInvested());
+        newBudget.setIncomeThisMonth(altBudget.getIncomeThisMonth());
         List<BudgetEntry> entrys= newBudget.getBudgetentries();
         for(BudgetEntry altEntry: altBudget.getBudgetentries()){
             BudgetEntry newEntry = new BudgetEntry();

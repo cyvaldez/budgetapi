@@ -40,9 +40,18 @@ public class BudgetEntryService {
         //Planed Amount will will be update
         User user= budget.getUser();
         switch(budgetEntry.getType()){
-            case INCOME -> user.setGlobalIncome(user.getGlobalIncome()+budgetEntry.getPlanedAmount());
-            case INVESTMENT -> user.setGlobalInvestment(user.getGlobalInvestment()+budgetEntry.getPlanedAmount());
-            case SAVING -> user.setGlobalSavings(user.getGlobalSavings()+budgetEntry.getPlanedAmount());
+            case INCOME -> {
+                budget.setIncomeThisMonth(budget.getIncomeThisMonth()+budgetEntry.getPlanedAmount());
+                user.setGlobalIncome(user.getGlobalIncome()+budgetEntry.getPlanedAmount());
+            }
+            case INVESTMENT -> {
+                budget.setInvested(budget.getInvested()+ budgetEntry.getPlanedAmount());
+                user.setGlobalInvestment(user.getGlobalInvestment()+budgetEntry.getPlanedAmount());
+            }
+            case SAVING -> {
+                budget.setSavings(budget.getSavings()+budgetEntry.getPlanedAmount());
+                user.setGlobalSavings(user.getGlobalSavings()+budgetEntry.getPlanedAmount());
+            }
             case SPENDING -> {
                 user.setGlobalSpending(user.getGlobalSpending()+budgetEntry.getUsedAmount());
                 budget.setPlanedAmount(budget.getPlanedAmount()+budgetEntry.getPlanedAmount());
@@ -66,9 +75,18 @@ public class BudgetEntryService {
             changeType(budgetId, budgetEntryId, budgetEntryDTO.getType());
         }
         switch(budgetEntry.getType()){
-            case INCOME -> user.setGlobalIncome(user.getGlobalIncome()+budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
-            case INVESTMENT -> user.setGlobalInvestment(user.getGlobalInvestment()+budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
-            case SAVING -> user.setGlobalSavings(user.getGlobalSavings()+budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
+            case INCOME -> {
+                budget.setIncomeThisMonth(budget.getIncomeThisMonth()-budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
+                user.setGlobalIncome(user.getGlobalIncome()-budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
+            }
+            case INVESTMENT -> {
+                budget.setInvested(budget.getInvested()- budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
+                user.setGlobalInvestment(user.getGlobalInvestment()-budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
+            }
+            case SAVING -> {
+                budget.setSavings(budget.getSavings()-budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
+                user.setGlobalSavings(user.getGlobalSavings()-budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
+            }
             case SPENDING -> {
                 user.setGlobalSpending(user.getGlobalSpending()-budgetEntry.getUsedAmount()+budgetEntryDTO.getUsedAmount());
                 budget.setPlanedAmount(budget.getPlanedAmount()-budgetEntry.getPlanedAmount()+budgetEntryDTO.getPlanedAmount());
@@ -104,8 +122,6 @@ public class BudgetEntryService {
             }
             default -> throw new IllegalArgumentException("Invalid Type");
         }
-        budget.setUsedAmount(budget.getUsedAmount()+ usedAmount);
-        budgetRepository.save(budget);
         budgetEntry.setUsedAmount(budgetEntry.getUsedAmount()+usedAmount);
         return new ExposeEntry(budgetEntryRepository.save(budgetEntry));
     }
@@ -141,10 +157,20 @@ public class BudgetEntryService {
         Budget budget= budgetEntry.getBudget();
         User user= budget.getUser();
         switch(budgetEntry.getType()){
-            case INCOME -> user.setGlobalIncome(user.getGlobalIncome()+budgetEntry.getPlanedAmount()+planedAmount);
-            case INVESTMENT -> user.setGlobalInvestment(user.getGlobalInvestment()+budgetEntry.getPlanedAmount()+planedAmount);
-            case SAVING -> user.setGlobalSavings(user.getGlobalSavings()+budgetEntry.getPlanedAmount()+planedAmount);
+            case INCOME -> {
+                budget.setIncomeThisMonth(budget.getIncomeThisMonth()-budgetEntry.getPlanedAmount()+planedAmount);
+                user.setGlobalIncome(user.getGlobalIncome()-budgetEntry.getPlanedAmount()+planedAmount);
+            }
+            case INVESTMENT -> {
+                budget.setInvested(budget.getInvested()- budgetEntry.getPlanedAmount()+planedAmount);
+                user.setGlobalInvestment(user.getGlobalInvestment()-budgetEntry.getPlanedAmount()+planedAmount);
+            }
+            case SAVING -> {
+                budget.setSavings(budget.getSavings()-budgetEntry.getPlanedAmount()+planedAmount);
+                user.setGlobalSavings(user.getGlobalSavings()-budgetEntry.getPlanedAmount()+planedAmount);
+            }
             case SPENDING -> {
+                user.setGlobalSpending(user.getGlobalSpending()-budgetEntry.getUsedAmount()+planedAmount);
                 budget.setPlanedAmount(budget.getPlanedAmount()-budgetEntry.getPlanedAmount()+planedAmount);
             }
             default -> throw new IllegalArgumentException("Invalid Type");
@@ -172,22 +198,41 @@ public class BudgetEntryService {
         Budget budget= budgetEntry.getBudget();
         User user= budget.getUser();
         switch(budgetEntry.getType()){
-            case INCOME -> user.setGlobalIncome(user.getGlobalIncome()-budgetEntry.getPlanedAmount());
-            case INVESTMENT -> user.setGlobalInvestment(user.getGlobalInvestment()-budgetEntry.getPlanedAmount());
-            case SAVING -> user.setGlobalSavings(user.getGlobalSavings()-budgetEntry.getPlanedAmount());
+            case INCOME -> {
+                budget.setIncomeThisMonth(budget.getIncomeThisMonth()-budgetEntry.getPlanedAmount());
+                user.setGlobalIncome(user.getGlobalIncome()-budgetEntry.getPlanedAmount());
+            }
+            case INVESTMENT -> {
+                budget.setInvested(budget.getInvested()- budgetEntry.getPlanedAmount());
+                user.setGlobalInvestment(user.getGlobalInvestment()-budgetEntry.getPlanedAmount());
+            }
+            case SAVING -> {
+                budget.setSavings(budget.getSavings()-budgetEntry.getPlanedAmount());
+                user.setGlobalSavings(user.getGlobalSavings()-budgetEntry.getPlanedAmount());
+            }
             case SPENDING -> {
                 user.setGlobalSpending(user.getGlobalSpending()-budgetEntry.getUsedAmount());
                 budget.setPlanedAmount(budget.getPlanedAmount()-budgetEntry.getPlanedAmount());
-                budget.setUsedAmount(budget.getUsedAmount()-budgetEntry.getUsedAmount());
+                budget.setUsedAmount( budget.getUsedAmount()-budgetEntry.getUsedAmount());
             }
             default -> throw new IllegalArgumentException("Invalid Type");
-        }//between the two we have to update the database just to be sure 
+        }
+        //between the two we have to update the database just to be sure 
         budgetRepository.save(budget);
         userRepository.save(user);
         switch(stringToType(newTyp.toUpperCase())){
-            case INCOME -> user.setGlobalIncome(user.getGlobalIncome()+budgetEntry.getPlanedAmount());
-            case INVESTMENT -> user.setGlobalInvestment(user.getGlobalInvestment()+budgetEntry.getPlanedAmount());
-            case SAVING -> user.setGlobalSavings(user.getGlobalSavings()+budgetEntry.getPlanedAmount());
+            case INCOME -> {
+                budget.setIncomeThisMonth(budget.getIncomeThisMonth()+budgetEntry.getPlanedAmount());
+                user.setGlobalIncome(user.getGlobalIncome()+budgetEntry.getPlanedAmount());
+            }
+            case INVESTMENT -> {
+                budget.setInvested(budget.getInvested()+ budgetEntry.getPlanedAmount());
+                user.setGlobalInvestment(user.getGlobalInvestment()+budgetEntry.getPlanedAmount());
+            }
+            case SAVING -> {
+                budget.setSavings(budget.getSavings()+budgetEntry.getPlanedAmount());
+                user.setGlobalSavings(user.getGlobalSavings()+budgetEntry.getPlanedAmount());
+            }
             case SPENDING -> {
                 user.setGlobalSpending(user.getGlobalSpending()+budgetEntry.getUsedAmount());
                 budget.setPlanedAmount(budget.getPlanedAmount()+budgetEntry.getPlanedAmount());
@@ -212,9 +257,18 @@ public class BudgetEntryService {
         }
         User user= budget.getUser();
         switch(budgetEntry.getType()){
-            case INCOME -> user.setGlobalIncome(user.getGlobalIncome()-budgetEntry.getPlanedAmount());
-            case INVESTMENT -> user.setGlobalInvestment(user.getGlobalInvestment()-budgetEntry.getPlanedAmount());
-            case SAVING -> user.setGlobalSavings(user.getGlobalSavings()-budgetEntry.getPlanedAmount());
+            case INCOME -> {
+                budget.setIncomeThisMonth(budget.getIncomeThisMonth()-budgetEntry.getPlanedAmount());
+                user.setGlobalIncome(user.getGlobalIncome()-budgetEntry.getPlanedAmount());
+            }
+            case INVESTMENT -> {
+                budget.setInvested(budget.getInvested()- budgetEntry.getPlanedAmount());
+                user.setGlobalInvestment(user.getGlobalInvestment()-budgetEntry.getPlanedAmount());
+            }
+            case SAVING -> {
+                budget.setSavings(budget.getSavings()-budgetEntry.getPlanedAmount());
+                user.setGlobalSavings(user.getGlobalSavings()-budgetEntry.getPlanedAmount());
+            }
             case SPENDING -> {
                 user.setGlobalSpending(user.getGlobalSpending()-budgetEntry.getUsedAmount());
                 budget.setPlanedAmount(budget.getPlanedAmount()-budgetEntry.getPlanedAmount());

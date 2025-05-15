@@ -1,5 +1,7 @@
 package com.budget.budgetapi.service;
 
+import java.time.Instant;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,13 @@ public class UserService {
         }
     }
 
+    public void logoutUser(String email){
+         User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+            user.setIsLoggedOut(true);
+             user.setLastLogoutTime(Instant.now());
+    }
+
     public ExposeUser getMe(UserAuth userAuth){
         User user = userRepository.findByEmail(userAuth.getEmail())
             .orElseThrow(() -> new RuntimeException("User not found"));
@@ -80,44 +89,7 @@ public class UserService {
             }
             throw new IllegalAccessError("wrong password");
     }
-/* 
-    public ExposeUser updateGlobalvalues(Long userId){
-        User user = userRepository.findById(userId)
-        .orElseThrow(() -> new RuntimeException("User not found"));
-        Double spending, invest, saving, income;
-        spending=0d;
-        invest=0.0;
-        saving= 0d;
-        income=0d;
 
-        for(Budget budget: user.getBudgets()){
-            for(BudgetEntry entry: budget.getBudgetentries()){
-                switch(entry.getType()){
-                    case INCOME:
-                    income=+ entry.getPlanedAmount();
-                    break;
-                    case INVERSTMENT:
-                    invest=+ entry.getPlanedAmount();
-                    break;
-                    case SAVING:
-                    saving=+ entry.getPlanedAmount();
-                    break;
-                    case SPENDING:
-                    spending=+ entry.getUsedAmount();
-                    break;
-                    default: 
-                    throw new IllegalArgumentException("Invalid Type");
-                }
-            }
-        }
-
-        user.setGlobalIncome(income);
-        user.setGlobalInvestment(invest);
-        user.setGlobalSavings(saving);
-        user.setGlobalSpending(spending);
-        return new ExposeUser( userRepository.save(user));
-    }
-*/
     public void deleteUserAccount( Long userId){
          userRepository.findById(userId)
             .orElseThrow(() -> new RuntimeException("User not found"));

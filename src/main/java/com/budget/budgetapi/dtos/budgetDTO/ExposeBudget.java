@@ -15,6 +15,9 @@ public class ExposeBudget {
     private String description;
     private Double planedAmount;
     private Double usedAmount;
+    private Double savings;
+    private Double invested;
+    private Double incomeThisMonth;
     private Month month;
     private Long userId;
     private LocalDate creationDate;
@@ -28,6 +31,9 @@ public class ExposeBudget {
         this.description= budget.getDescription();
         this.planedAmount= budget.getPlanedAmount();
         this.usedAmount= budget.getUsedAmount();
+        this.savings = budget.getSavings();
+        this.invested = budget.getInvested();
+        this.incomeThisMonth = budget.getIncomeThisMonth();
         this.month= budget.getMonth();
         this.userId= budget.getUser().getId();
         this.creationDate= budget.getCreationDate();
@@ -75,6 +81,31 @@ public class ExposeBudget {
 
     public void setUsedAmount(Double usedAmount) {
         this.usedAmount = usedAmount;
+    }
+
+    
+    public Double getSavings() {
+        return savings;
+    }
+
+    public void setSavings(Double savings) {
+        this.savings = savings;
+    }
+
+    public Double getInvested() {
+        return invested;
+    }
+
+    public void setInvested(Double invested) {
+        this.invested = invested;
+    }
+
+    public Double getIncomeThisMonth() {
+        return incomeThisMonth;
+    }
+
+    public void setIncomeThisMonth(Double incomeThisMonth) {
+        this.incomeThisMonth = incomeThisMonth;
     }
 
     public Month getMonth() {

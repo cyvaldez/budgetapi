@@ -1,5 +1,6 @@
 package com.budget.budgetapi.model;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class User {
     private Double globalIncome=0d;
     private Double globalSavings=0d;
     private Double globalInvestment=0d;
+    private Boolean isLoggedOut= false;
+    private Instant lastLogoutTime;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval=true)
     private List<Budget> budgets = new ArrayList<>();
@@ -105,6 +108,18 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-
+    public Boolean getIsLoggedOut() {
+        return isLoggedOut;
+    }
+    public void setIsLoggedOut(Boolean isLoggedOut) {
+        this.isLoggedOut = isLoggedOut;
+    }
+    public Instant getLastLogoutTime() {
+        return lastLogoutTime;
+    }
+    public void setLastLogoutTime(Instant lastLogoutTime) {
+        this.lastLogoutTime = lastLogoutTime;
+    }
+    
     
 }

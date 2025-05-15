@@ -2,6 +2,7 @@ package com.budget.budgetapi.security;
 
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             //if not a token can be falsify to acces to another userinformation or oparate forbiden modifications
             User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+            // Vérifie si le token est obsolète
+            Instant tokenIat = jwtUtil.extractIssuedAt(token);
+            if (Boolean.TRUE.equals(user.getIsLoggedOut()) &&
+                user.getLastLogoutTime() != null &&
+                tokenIat.isBefore(user.getLastLogoutTime())) {
+
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
+            
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(new UserAuth(user), null, List.of());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
